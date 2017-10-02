@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "name": "Minimal New Tab",
+    "version": "1.0.0",
+    "description": "A minimal new tab page for Chrome.",
+    "author": "Adolph C.",
+
+    "chrome_url_overrides": {
+        "newtab": "newtab.html"
+    },
+
+    "web_accessible_resources": [
+        "js/app.bundle.js"
+    ]
+}

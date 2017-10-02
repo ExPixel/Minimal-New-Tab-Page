@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"declaration": false,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"removeComments": false,
+		"sourceMap": true,
+		"preserveConstEnums": true,
+		"typeRoots": [
+			"./node_modules/@types"
+		],
+		"outDir": "./dist/js",
+		"target": "es6",
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"strictNullChecks": true,
+		"jsx": "preserve"
+	},
+
+	"include": [
+		"src/ts/**/*.ts",
+		"src/components/**/*.tsx",
+		"src/main.ts"
+	],
+
+	 "exclude": [
+		"node_modules",
+		"**/*-spec.ts"
+    ]
+}

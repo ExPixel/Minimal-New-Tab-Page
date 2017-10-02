@@ -1,0 +1,33 @@
+$mmt-bg-color: #343a40;
+$mmt-bg-dark-color: #212529;
+$mmt-text-color: #f8f9fa;
+$mmt-meta-color: #ced4da;
+$mmt-accent-color: #228ae6;
+
+/// These are styles used for theming minimal new tab page's components.
+/// Everything below the line ##MINIMAL-THEME-CSS-BEGIN## should be valid CSS (with the exception of variables)
+/// as minimal uses a text replace to inject the theme.
+
+//##MINIMAL-THEME-CSS-BEGIN##
+body { background-color: $mmt-bg-color; }
+.mmt-style-app  { background-color: $mmt-bg-color; color: $mmt-text-color; }
+.mmt-style-time { color: $mmt-text-color; }
+.mmt-style-date { color: $mmt-text-color; }
+// .mmt-style-options-pane { background-color: $mmt-bg-dark-color; }
+// .mmt-style-options-pane-section {  }
+
+.mmt-style-speed-item       { border-bottom: 2px solid transparent; transition: border-bottom 0.1s ease-out;}
+.mmt-style-speed-item:hover { border-bottom: 2px solid $mmt-accent-color; transition: border-bottom 0.2s ease-in; }
+.mmt-style-speed-item-title { color: $mmt-text-color; }
+.mmt-style-speed-item-url   { color: $mmt-meta-color; }
+
+.mmt-style-main-separator {
+    background-color: $mmt-accent-color;
+    /* opacity: 0.8; */
+}
+
+/* Some Styling For Components */
+.mmt-style-icon-button.selected { color: $mmt-accent-color; }
+.mmt-style-icon-button:active { color: $mmt-accent-color; }
+.mmt-style-icon-button:hover { color: $mmt-accent-color; }
+//##MINIMAL-THEME-CSS-END##

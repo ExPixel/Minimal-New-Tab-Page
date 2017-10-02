@@ -1,0 +1,36 @@
+@import "variables";
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    
+    &:not(:last-child) { margin-bottom: $padding-layout / 2; }
+
+    &.form-buttons {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+
+
+.form-label {
+    font-size: 0.8em;
+}
+
+.form-input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1em;
+    color: inherit;
+
+    border-radius: $border-radius;
+    border-bottom: 2px solid #adb5bd;
+    transition: border-bottom-color .2s ease;
+
+    &.style-options-input {
+        color: #343a40;
+        background-color: #f1f3f5;
+        &:focus { border-bottom-color: #1c7cd6; }
+    }
+}

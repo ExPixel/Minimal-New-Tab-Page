@@ -1,0 +1,51 @@
+.icon-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0.4rem;
+    margin: 0;
+    vertical-align: middle;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    font-size: 1em;
+    transition: color .2s ease, transform .2s ease;
+
+    &.disabled, &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    // We want pointer events to be on the button, not its contents.
+    svg { pointer-events: none; }
+    .icon { pointer-events: none; }
+
+    &.selected.icon-rotate-selected,
+    &.icon-rotate-selected:hover,
+    &.icon-rotate-selected:active {
+        transform: rotate(45deg);
+        transform-origin: 50% 50%;
+    }
+
+    &.btn-large {
+        font-size: 2.4rem;
+    }
+
+    &.style-options-btn-red:hover,
+    &.style-options-btn-red:active,
+    &.style-options-btn-red.selected {
+        color: #f03e3e;
+        &.disabled, &:disabled { color: inherit; }
+    }
+    
+    &.style-options-btn-blue:hover,
+    &.style-options-btn-blue:active,
+    &.style-options-btn-blue.selected {
+        color: #1c7cd6;
+        &.disabled, &:disabled { color: inherit; }
+    }
+}

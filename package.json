@@ -1,0 +1,39 @@
+{
+  "name": "minimalnewtab",
+  "version": "1.0.0",
+  "description": "Minimal new tab page for Chrome.",
+  "main": "index.js",
+  "repository": "https://github.com/expixel/minimalnewtab",
+  "author": "Adolph C.",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mithril": "^1.1.8",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-minify": "^0.2.0",
+    "babelify": "^7.3.0",
+    "brfs": "^1.4.3",
+    "browserify": "^14.4.0",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-csso": "^3.0.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-typescript": "^3.2.2",
+    "gulp-util": "^3.0.8",
+    "merge2": "^1.2.0",
+    "run-sequence": "^2.2.0",
+    "tsify": "^3.0.3",
+    "typescript": "^2.5.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "@types/dragula": "^2.1.32",
+    "dragula": "^3.7.2",
+    "mithril": "^1.1.3"
+  }
+}
