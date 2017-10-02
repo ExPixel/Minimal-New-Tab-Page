@@ -12,9 +12,13 @@ export default class SpeedDialListItem implements m.Component<ISpeedDialListItem
 
     public view(vnode: m.Vnode<ISpeedDialListItemAttrs, any>) {
         return m("li.speed-dial-list-item.mmt-style-speed-item", {
-            onclick: () => {
+            onclick: (event: MouseEvent) => {
                 if (vnode.attrs.itemUrl) {
-                    window.location.href = vnode.attrs.itemUrl;
+                    if (event.ctrlKey || event.metaKey) {
+                        window.open(vnode.attrs.itemUrl, "_blank");
+                    } else {
+                        window.location.href = vnode.attrs.itemUrl;
+                    }
                 }
             },
             title: vnode.attrs.itemTitle
