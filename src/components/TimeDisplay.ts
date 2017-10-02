@@ -1,3 +1,9 @@
+/*
+ * #NOTE: Remove all of the FIXME's with a tag of granular-redraw
+ * once mithril gets the capability to update subtrees instead of
+ * only the root.
+ */
+
 import m = require("mithril");
 import { getUserLocale } from "../ts/util";
 
@@ -19,11 +25,22 @@ export default class TimeDisplay implements m.Component<ITimeDisplayAttrs, any> 
     private timeFormatter: Intl.DateTimeFormat;
     private updateTimer: number | null = null;
     private showingSeconds: boolean = false;
-
     private lastDate: Date | null = null;
+
+    private timerDOMElement: HTMLElement | null = null; // #FIXME(granular-redraw): Remove this
+    private awaitingUpdate: boolean = false; // #FIXME(granular-redraw): Remove this
 
     constructor(vnode: m.Vnode<ITimeDisplayAttrs, any>) {
         this.showingSeconds = !!vnode.attrs.showSeconds;
+        this.updateTimerOnAnimation = this.updateTimerOnAnimation.bind(this);
+    }
+
+    // #FIXME(granular-redraw): Remove this.
+    private updateTimerOnAnimation() {
+        this.awaitingUpdate = false;
+        if (this.timerDOMElement) {
+            this.timerDOMElement.innerText = this.timeFormatter.format(new Date);   
+        }
     }
 
     private initFormatter() {
@@ -40,7 +57,14 @@ export default class TimeDisplay implements m.Component<ITimeDisplayAttrs, any> 
         this.updateTimer = setInterval(() => {
             const check = new Date;
             if (this.lastDate === null || isDifferentTimeDisplay(this.lastDate, check, this.showingSeconds)) {
-                m.redraw();
+                // #FIXME(granular-redraw): Make this only redraw this component.
+                // m.redraw();
+
+                // #FIXME(granular-redraw): Remove this.
+                if (!this.awaitingUpdate) {
+                    this.awaitingUpdate = true;
+                    requestAnimationFrame(this.updateTimerOnAnimation);
+                }
             }
             this.lastDate = check;
         }, interval || defaultInterval);
@@ -58,10 +82,9 @@ export default class TimeDisplay implements m.Component<ITimeDisplayAttrs, any> 
         this.initUpdateTimer(vnode.attrs.updateInterval);
     }
 
-    public oncreate(vnode: m.Vnode<ITimeDisplayAttrs, any>) {
-        if (!this.updateTimer) {
-            this.initUpdateTimer(vnode.attrs.updateInterval);
-        }
+    public oncreate(vnode: m.VnodeDOM<ITimeDisplayAttrs, any>) {
+        if (!this.updateTimer) { this.initUpdateTimer(vnode.attrs.updateInterval); }
+        this.timerDOMElement = vnode.dom as HTMLElement;
     }
 
     public onbeforeupdate(vnode: m.Vnode<ITimeDisplayAttrs, any>) {
