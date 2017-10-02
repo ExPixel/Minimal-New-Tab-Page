@@ -41,7 +41,7 @@ const purpleTheme: IMinimalTheme = {
     accentColor: "#FFDF5A"
 };
 
-const defaultTheme = purpleTheme;
+const defaultTheme = darkTheme;
 
 function loadMinimalThemeStylesheet(sheetId: string, source: string) {
     const found = document.querySelector(`head > style[data-sheetId="${sheetId}"]`);
