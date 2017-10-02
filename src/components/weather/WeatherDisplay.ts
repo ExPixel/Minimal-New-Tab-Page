@@ -1,5 +1,5 @@
 import m = require("mithril");
-import WeatherService from "./Weather";
+import WeatherService from "../../ts/weather";
 
 export default class WeatherDisplay implements m.Component<any, any> {
     view() {
