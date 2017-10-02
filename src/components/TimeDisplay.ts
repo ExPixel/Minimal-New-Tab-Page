@@ -84,7 +84,8 @@ export default class TimeDisplay implements m.Component<ITimeDisplayAttrs, any> 
 
     public oncreate(vnode: m.VnodeDOM<ITimeDisplayAttrs, any>) {
         if (!this.updateTimer) { this.initUpdateTimer(vnode.attrs.updateInterval); }
-        this.timerDOMElement = vnode.dom as HTMLElement;
+        this.awaitingUpdate = false; // #FIXME(granular-redraw): Remove this
+        this.timerDOMElement = vnode.dom as HTMLElement; // #FIXME(granular-redraw): Remove this
     }
 
     public onbeforeupdate(vnode: m.Vnode<ITimeDisplayAttrs, any>) {
@@ -95,8 +96,10 @@ export default class TimeDisplay implements m.Component<ITimeDisplayAttrs, any> 
         }
     }
 
-    public onbeforeremove() {
+    public onbeforeremove(vnode: m.VnodeDOM<ITimeDisplayAttrs, any>) {
         this.clearUpdateTimer();
+        this.timerDOMElement = null; // #FIXME(granular-redraw): Remove this
+        this.awaitingUpdate = false; // #FIXME(granular-redraw): Remove this
     }
 
     public view(vnode: m.Vnode<ITimeDisplayAttrs, any>) {
