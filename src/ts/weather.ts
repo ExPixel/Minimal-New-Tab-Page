@@ -1,4 +1,4 @@
-const TEST_OWM_API_KEY = "ceeaedf95ef733bdcba0173c9307b76b";
+const TEST_OWM_API_KEY = "";
 
 export enum WeatherUnit { Celcius, Fahrenheit, Kelvin }
 export enum WeatherIcon {  }
