@@ -214,6 +214,11 @@ export class SpeedDialEditorInputs implements m.Component<SpeedDialEditorInputsA
     private setTitle(val: string) { this.title = val; }
     private setURL(val: string) { this.url = val; }
 
+    oncreate(vnode: m.VnodeDOM<SpeedDialEditorInputsAttrs, any>) {
+        const titleElement = document.getElementById(this.titleId) as HTMLElement;
+        if (titleElement) { titleElement.focus(); }
+    }
+
     view(vnode: m.Vnode<SpeedDialEditorInputsAttrs, any>) {
         const onCommitAction = (event: Event) => {
             event.preventDefault();
