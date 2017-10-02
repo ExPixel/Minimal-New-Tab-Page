@@ -83,7 +83,7 @@ export default class SpeedDialEditor implements m.Component<SpeedDialEditorAttrs
         const dragRoot = vnode.dom.getElementsByClassName("speed-dial-items")![0];
         this.drake = dragula([dragRoot], {
             moves: (el, source, handle) => {
-                return !this.editing && (handle as HTMLElement).classList.contains("sd-item-handle");
+                return !this.editing && !this.creating && (handle as HTMLElement).classList.contains("sd-item-handle");
             },
 
             accepts: (el, target) => {
