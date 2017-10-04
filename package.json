@@ -10,6 +10,7 @@
     "pkg": "node ./tools/package-extension.js builds/minimalnewtab-[version].zip"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.49",
     "@types/mithril": "^1.1.8",
     "archiver": "^2.0.3",
     "babel-core": "^6.26.0",
