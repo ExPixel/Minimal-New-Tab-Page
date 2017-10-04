@@ -3,6 +3,7 @@ import Options from "../../ts/options";
 import Switch from "../misc/Switch";
 import { icon, Icons } from "../icons/icons";
 import SpeedDialEditor from "./SpeedDialEditor";
+import { themeChangedByName } from "../../ts/theming/index";
 
 export interface OptionsPaneAttrs {
     isHidden: boolean;
@@ -15,6 +16,12 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
     }
 
     private onThemeSelected(event: UIEvent) {
+        if (event && event.target && typeof (event.target as any)["value"] === "string") {
+            const value = (event.target as any)["value"] as string;
+            Options.selectedThemeName = value;
+            themeChangedByName(Options.selectedThemeName);
+            Options.save();
+        }
     }
 
     view(vnode: m.Vnode<OptionsPaneAttrs, any>) {
@@ -25,7 +32,7 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
         const newThemeOption = (shortname: string, longname: string) => {
             return m("option", {
                 value: shortname,
-                selected: Options.selectedThemeName === shortname,
+                selected: Options.selectedThemeName === shortname
             }, longname);
         };
 
@@ -71,10 +78,14 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
 
             m("section.flex-column.margin-h", [
                 m("h4", "Theme"),
-                m("select", {}, [
+                m("select", {
+                    value: Options.selectedThemeName,
+                    onchange: this.onThemeSelected
+                }, [
                     newThemeOption("dark-theme", "Dark Theme"),
                     newThemeOption("light-theme", "Light Theme"),
                     newThemeOption("purple-theme", "Purple Theme"),
+                    newThemeOption("dark-berry-theme", "Dark Berry Theme"),
                 ])
             ])
         ];

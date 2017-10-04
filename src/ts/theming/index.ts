@@ -2,46 +2,13 @@ declare const __dirname: string;
 declare function require(name:string): any;
 declare interface FileSystem { readFileSync: (filename: string, encoding: string) => string; }
 
-import MStorage from "./storage";
+import MStorage from "../storage";
+import { defaultTheme, IMinimalTheme, getThemeByName, themeKeys } from "./theme-defs";
 const fs: FileSystem = require("fs");
 
 /** Local Storage Key  */
 const THEME_LS_KEY = "theme";
 const MINIMAL_THEME_STYLESHEET_ID = "mmt-theming";
-
-export interface IMinimalTheme {
-    backgroundColor: string;
-    backgroundColorDark: string;
-    textColor: string;
-    metaColor: string;
-    accentColor: string;
-}
-
-const darkTheme: IMinimalTheme = {
-    backgroundColor: "#343a40",
-    backgroundColorDark: "#212529",
-    textColor: "#f8f9fa",
-    metaColor: "#ced4da",
-    accentColor: "#228ae6"
-};
-
-const lightTheme: IMinimalTheme = {
-    backgroundColor: "#f8f9fa",
-    backgroundColorDark: "#e9ecef",
-    textColor: "#343a40",
-    metaColor: "#868e96",
-    accentColor: "#228ae6"
-};
-
-const purpleTheme: IMinimalTheme = {
-    backgroundColor: "#71397C",
-    backgroundColorDark: "#60366F",
-    textColor: "#f8f9fa",
-    metaColor: "#C582D5",
-    accentColor: "#FFDF5A"
-};
-
-const defaultTheme = darkTheme;
 
 function loadMinimalThemeStylesheet(sheetId: string, source: string) {
     const found = document.querySelector(`head > style[data-sheetId="${sheetId}"]`);
@@ -74,7 +41,7 @@ const themeSource = (function() {
     const THEME_START_MARKER = "//##MINIMAL-THEME-CSS-BEGIN##";
     const THEME_END_MARKER = "//##MINIMAL-THEME-CSS-END##";
 
-    const source = fs.readFileSync(__dirname + "/../sass/minimal-theme.scss", "utf8");
+    const source = fs.readFileSync(__dirname + "/../../sass/minimal-theme.scss", "utf8");
     const begin = source.indexOf(THEME_START_MARKER) + THEME_START_MARKER.length;
     const end = source.indexOf(THEME_END_MARKER);
 
@@ -104,6 +71,30 @@ export function loadTheme(newTheme?: any) {
         }
     });
     loadMinimalThemeStylesheet(MINIMAL_THEME_STYLESHEET_ID, replacedSource);
+}
+
+export function themeChangedByName(themeName: string) {
+    const theme = getThemeByName(themeName) || defaultTheme;
+    loadTheme(theme);
+    MStorage.set(THEME_LS_KEY, theme);
+}
+
+/**
+ * Makes sure that the theme being stored in local storage matches the
+ * theme with the given name. If they don't match the corrected theme
+ * is stored.
+ */
+export function checkThemeMatch(themeName: string) {
+    const currentTheme: any = MStorage.get(THEME_LS_KEY) || defaultTheme;
+    const correctTheme: any = getThemeByName(themeName) || defaultTheme;
+
+    for (const key of themeKeys) {
+        if (currentTheme[key] !== correctTheme[key]) {
+            console.log("Correcting stored theme '%s'.", themeName);
+            themeChangedByName(themeName);
+            break;
+        }
+    }
 }
 
 loadTheme(MStorage.get(THEME_LS_KEY));

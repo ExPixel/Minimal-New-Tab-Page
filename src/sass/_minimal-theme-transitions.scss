@@ -1,0 +1,16 @@
+// Transition delay.
+$mmt-tdelay: .2s;
+
+body { transition: background-color $mmt-tdelay ease; }
+.mmt-style-app  { transition: background-color $mmt-tdelay ease, color $mmt-tdelay ease; }
+.mmt-style-time { transition: color $mmt-tdelay ease; }
+.mmt-style-date { transition: color $mmt-tdelay ease; }
+.mmt-style-speed-item-title { transition: color $mmt-tdelay ease; }
+.mmt-style-speed-item-url   { transition: color $mmt-tdelay ease; }
+.mmt-style-main-separator { transition: background-color $mmt-tdelay ease; }
+
+.mmt-style-icon-button.selected,
+.mmt-style-icon-button:active,
+.mmt-style-icon-button:hover {
+    transition: color $mmt-tdelay ease;
+}

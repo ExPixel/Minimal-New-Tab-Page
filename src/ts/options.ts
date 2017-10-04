@@ -1,5 +1,7 @@
 import m = require("mithril");
 import MStorage from "./storage";
+import { defaultThemeName } from "./theming/theme-defs";
+import { checkThemeMatch } from "./theming/index";
 
 const OPTIONS_LS_KEY = "options";
 
@@ -9,7 +11,10 @@ export class Options {
     public displayWeather: boolean = true;
     public displaySpeedDial: boolean = true;
     public displaySeconds: boolean = false;
-    public selectedThemeName: string = "dark-theme";
+    public selectedThemeName: string = defaultThemeName;
+
+    public checkThemeMatch() {
+    }
 
     public edit(f: (o: Options) => any) {
         f(this);
@@ -32,6 +37,8 @@ export class Options {
                 }
             });
         }
+
+        checkThemeMatch(this.selectedThemeName);
     }
 
     public save() {

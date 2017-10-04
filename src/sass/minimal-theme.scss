@@ -17,7 +17,7 @@ body { background-color: $mmt-bg-color; }
 // .mmt-style-options-pane-section {  }
 
 .mmt-style-speed-item       { border-bottom: 2px solid transparent; transition: border-bottom 0.1s ease-out;}
-.mmt-style-speed-item:hover { border-bottom: 2px solid $mmt-accent-color; transition: border-bottom 0.2s ease-in; }
+.mmt-style-speed-item:hover { background-color: $mmt-bg-dark-color; border-bottom: 2px solid $mmt-accent-color; transition: border-bottom 0.2s ease-in, background-color 0.2s ease-in; }
 .mmt-style-speed-item-title { color: $mmt-text-color; }
 .mmt-style-speed-item-url   { color: $mmt-meta-color; }
 
