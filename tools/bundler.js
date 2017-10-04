@@ -55,7 +55,7 @@ class Bundle {
 
     bundle() {
         return this.bundler.bundle()
-            .on('error', gutil.log.bind(gutil, "Browserify Error"))
+            .on('error', gutil.log.bind(gutil, `Browserify Error [${this.name}]`))
             .pipe(source(this.name))
             .pipe(buffer())
             .pipe(gulp.dest(this.dest));

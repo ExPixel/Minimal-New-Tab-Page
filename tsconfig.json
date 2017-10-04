@@ -18,12 +18,6 @@
 		"jsx": "preserve"
 	},
 
-	"include": [
-		"src/ts/**/*.ts",
-		"src/components/**/*.tsx",
-		"src/main.ts"
-	],
-
 	 "exclude": [
 		"node_modules",
 		"**/*-spec.ts"

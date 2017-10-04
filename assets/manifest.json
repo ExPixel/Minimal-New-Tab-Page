@@ -5,6 +5,10 @@
     "description": "A minimal new tab page for Chrome.",
     "author": "Adolph C.",
 
+    "background": {
+        "scripts": ["js/background.bundle.js"]
+    },
+
     "chrome_url_overrides": {
         "newtab": "newtab.html"
     },
