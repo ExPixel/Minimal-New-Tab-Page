@@ -9,6 +9,7 @@ export class Options {
     public displayWeather: boolean = true;
     public displaySpeedDial: boolean = true;
     public displaySeconds: boolean = false;
+    public selectedThemeName: string = "dark-theme";
 
     public edit(f: (o: Options) => any) {
         f(this);

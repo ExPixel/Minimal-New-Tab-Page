@@ -1,3 +1,8 @@
+export interface _MStorageTTL {
+    storedTime: number;
+    expiresIn: number;
+}
+
 export class _MStorage {
     constructor(private prefix: string) {}
 
@@ -17,6 +22,29 @@ export class _MStorage {
             }
         }
         return undefined;
+    }
+
+    public ttlSet(key: string, ttl: number, value: any) {
+        const ttlObj: _MStorageTTL = { storedTime: Date.now(), expiresIn: ttl };
+        this.set(key, value);
+        this.set(key + "::~ttl", ttlObj);
+    }
+
+    public ttlGet<T>(key: string): T | undefined {
+        const ttlObj = this.get<_MStorageTTL>(key + "::~ttl");
+        if (ttlObj) {
+            const now = Date.now();
+            if (now > (ttlObj.storedTime + ttlObj.expiresIn)) {
+                this.ttlRemove(key);
+                return undefined;
+            }
+        }
+        this.get<T>(key);
+    }
+
+    public ttlRemove<T>(key: string) {
+        this.remove(key + "::~ttl");
+        this.remove(key);
     }
 
     public getRaw(key: string): string | undefined {

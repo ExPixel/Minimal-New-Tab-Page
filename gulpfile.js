@@ -35,11 +35,21 @@ const bundles = [
         entries: "src/main.ts",
         name: "app.bundle.js",
         dest: "dist/js",
-        debug: true,
         plugins: [ [tsify, "tsconfig.json"] ],
         transforms: [ ["brfs"] ],
+        debug: true,
         watch: false,
-    }
+    },
+
+    {
+        entries: "src/background.ts",
+        name: "background.bundle.js",
+        dest: "dist/js",
+        plugins: [ [tsify, "tsconfig.json"] ],
+        transforms: [ ["brfs"] ],
+        debug: true,
+        watch: false,
+    },
 ];
 
 const browserEnvOptions = {

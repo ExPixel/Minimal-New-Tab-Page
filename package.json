@@ -6,8 +6,12 @@
   "repository": "https://github.com/expixel/minimalnewtab",
   "author": "Adolph C.",
   "license": "MIT",
+  "scripts": {
+    "pkg": "node ./tools/package-extension.js builds/minimalnewtab-[version].zip"
+  },
   "devDependencies": {
     "@types/mithril": "^1.1.8",
+    "archiver": "^2.0.3",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-minify": "^0.2.0",
@@ -24,6 +28,7 @@
     "gulp-typescript": "^3.2.2",
     "gulp-util": "^3.0.8",
     "merge2": "^1.2.0",
+    "mkdirp": "^0.5.1",
     "run-sequence": "^2.2.0",
     "tsify": "^3.0.3",
     "typescript": "^2.5.2",

@@ -10,9 +10,23 @@ export interface OptionsPaneAttrs {
 }
 
 export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
+    constructor() {
+        this.onThemeSelected = this.onThemeSelected.bind(this);
+    }
+
+    private onThemeSelected(event: UIEvent) {
+    }
+
     view(vnode: m.Vnode<OptionsPaneAttrs, any>) {
         const newSection = (title: string, contents: m.Vnode<any, any>[]) => {
             return m("section.flex-column.margin-h", [m("h4", title)].concat(contents));
+        };
+
+        const newThemeOption = (shortname: string, longname: string) => {
+            return m("option", {
+                value: shortname,
+                selected: Options.selectedThemeName === shortname,
+            }, longname);
         };
 
         const sections = [
@@ -53,11 +67,20 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                 ]),
 
                 m(SpeedDialEditor, {isHidden: vnode.attrs.isHidden})
+            ]),
+
+            m("section.flex-column.margin-h", [
+                m("h4", "Theme"),
+                m("select", {}, [
+                    newThemeOption("dark-theme", "Dark Theme"),
+                    newThemeOption("light-theme", "Light Theme"),
+                    newThemeOption("purple-theme", "Purple Theme"),
+                ])
             ])
         ];
 
         return m(".minimal-options.mmt-style-options-pane", vnode.attrs, [
-            m(".minimal-sections", [
+            m(".minimal-sections.margin-bottom", [
                 m("section.margin-h", m("h2.margin-top", [icon(Icons.Settings, {style: "margin-right: 8px;"}), "Options"])),
                 sections
             ])
