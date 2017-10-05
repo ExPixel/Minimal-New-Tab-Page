@@ -39,7 +39,19 @@ export class _MStorage {
                 return undefined;
             }
         }
-        this.get<T>(key);
+        return this.get<T>(key);
+    }
+
+    public ttlGetWithTTL<T>(key: string): [T | undefined, _MStorageTTL | undefined] {
+        const ttlObj = this.get<_MStorageTTL>(key + "::~ttl");
+        if (ttlObj) {
+            const now = Date.now();
+            if (now > (ttlObj.storedTime + ttlObj.expiresIn)) {
+                this.ttlRemove(key);
+                return [undefined, ttlObj];
+            }
+        }
+        return [this.get<T>(key), ttlObj];
     }
 
     public ttlRemove<T>(key: string) {

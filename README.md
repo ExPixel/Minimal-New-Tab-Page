@@ -22,3 +22,8 @@ Development &amp; Building
 - **Production Build:** Running `gulp build:prod` will create a production build (without sourcemaps and with minifying) in the `dist` directory.
 
 - **Packaing for Chrome Web Store:** To package the extension for uploading to the Chrome Web Store, simply run `yarn run pkg` or `npm run pkg` to create a zip file with the name `minimalnewtab-[version].zip` in the `builds` directory. The zip file can be uploaded on the Chrome Web Store.
+
+Credits
+---
+
+- Weather Icons Are By [Daniel Vierich](http://www.danvierich.de/)

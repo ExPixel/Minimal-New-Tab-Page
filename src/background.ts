@@ -1,5 +1,6 @@
 import { getCurrentWeather, CurrentWeatherRequest } from "./ts/weather";
 import { CMessage, isCMessage, CMessageType, CTimeRequest } from "./ts/messaging";
+import { getCachedCurrentWeatherRequestResponse, setCachedCurrentWeatherRequestResponse } from "./ts/weather/cache";
 
 async function handleCMessage(request: CMessage<any>, sendResponse: (resp: any) => any) {
     switch (request.type) {
@@ -11,8 +12,14 @@ async function handleCMessage(request: CMessage<any>, sendResponse: (resp: any) 
 
         case CMessageType.WeatherRequest: {
             const weatherRequest = request as CurrentWeatherRequest;
-            const weather = await getCurrentWeather(weatherRequest);
-            sendResponse(weather);
+            const cachedResponse = getCachedCurrentWeatherRequestResponse(weatherRequest);
+            if (cachedResponse) {
+                sendResponse(cachedResponse);
+            } else {
+                const weather = await getCurrentWeather(weatherRequest);
+                setCachedCurrentWeatherRequestResponse(weatherRequest, weather);
+                sendResponse(weather);
+            }
             break;
         }
 

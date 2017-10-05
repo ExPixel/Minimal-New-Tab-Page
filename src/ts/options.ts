@@ -13,6 +13,10 @@ export class Options {
     public displaySeconds: boolean = false;
     public selectedThemeName: string = defaultThemeName;
 
+    public weatherService: string = "dark-sky";
+    public weatherInfo = { latitude: 0, longitude: 0, units: "imperial" };
+    public darkSky = { apiKey: "" };
+
     public checkThemeMatch() {
     }
 

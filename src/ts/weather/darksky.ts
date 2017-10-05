@@ -181,6 +181,26 @@ export class DSWeatherService implements WeatherService {
         }
     }
 
+    private convertDSIconToMIcon(dsIcon?: DSWeatherIcon): WeatherIcon {
+        if (dsIcon) {
+            switch (dsIcon) {
+                case DSWeatherIcon.ClearDay: return WeatherIcon.ClearDay;
+                case DSWeatherIcon.ClearNight: return WeatherIcon.ClearNight;
+                case DSWeatherIcon.Rain: return WeatherIcon.RainDay;
+                case DSWeatherIcon.Snow: return WeatherIcon.SnowDay;
+                case DSWeatherIcon.Sleet: return WeatherIcon.SleetDay;
+                case DSWeatherIcon.Wind: return WeatherIcon.WindDay;
+                case DSWeatherIcon.Fog: return WeatherIcon.Fog;
+                case DSWeatherIcon.Cloudy: return WeatherIcon.Cloudy;
+                case DSWeatherIcon.PartlyCloudyDay: return WeatherIcon.PartlyCloudyDay;
+                case DSWeatherIcon.PartlyCloudyNight: return WeatherIcon.PartlyCloudyNight;
+            }
+        }
+
+        // #FIXME: Should have a better default than this one.
+        return WeatherIcon.Cloudy;
+    }
+
     public async getCurrentForecast(units: WeatherUnits, latitude: number, longitude: number): Promise<Weather> {
         const dsWeather = await this.api.forcast({
             latitude,
@@ -195,7 +215,7 @@ export class DSWeatherService implements WeatherService {
             temp: dsWeather.currently.temperature!,
             highTemp: dsWeather.currently.temperatureHigh,
             lowTemp: dsWeather.currently.temperatureLow,
-            icon: WeatherIcon.Unknown,
+            icon: this.convertDSIconToMIcon(dsWeather.currently.icon),
             units,
             summary: dsWeather.currently.summary!
         };

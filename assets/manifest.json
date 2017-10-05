@@ -27,6 +27,7 @@
     },
 
     "web_accessible_resources": [
+        "img/weather/*.svg",
         "js/app.bundle.js"
     ]
 }
