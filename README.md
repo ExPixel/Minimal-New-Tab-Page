@@ -8,7 +8,7 @@ Minimal new tab page extension for Chrome.
 Screenshots
 ---
 
-![Light Theme Screenshot](assets-raw/screenshots/light-sc.png)
+![Light Theme Screenshot](assets-raw/screenshots/midnight-red-sc.png)
 
 Development &amp; Building
 ---
