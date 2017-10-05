@@ -7,8 +7,9 @@
   "author": "Adolph C.",
   "license": "MIT",
   "scripts": {
-    "pkg": "node ./tools/package-extension.js builds/minimalnewtab-[version].zip",
-    "build-icons": "./node_modules/.bin/svgexport ./assets-raw/icon-gen-datafile.json"
+    "build:prod": "./node_modules/.bin/gulp build:prod",
+    "pkg": "npm run build:prod && npm run build:icons && node ./tools/package-extension.js builds/minimalnewtab-[version].zip",
+    "build:icons": "./node_modules/.bin/svgexport ./assets-raw/icon-gen-datafile.json"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.49",
