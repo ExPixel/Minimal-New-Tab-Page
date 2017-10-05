@@ -198,3 +198,25 @@ $options-text-color: #f8f9fa;
         }
     }
 }
+
+// WEATHER
+.weather-display {
+    .weather-icon {
+        font-size: 6.0rem;
+        
+        // This fixes a bug where the SVGs for the weather icons
+        // are being cut off on the sides. I'm not sure what causes this at the moment.
+        svg {
+            overflow: visible;
+        }
+    }
+
+    .weather-temp {
+        font-size: 2.6rem;
+    }
+
+    .weather-summary {
+        text-align: center;
+        font-size: 1.8rem;
+    }
+}

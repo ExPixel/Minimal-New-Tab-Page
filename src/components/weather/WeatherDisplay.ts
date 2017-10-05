@@ -12,6 +12,7 @@ export const weatherControl = {
 
 export default class WeatherDisplay implements m.Component<any, any> {
     private loading: boolean = false;
+    private weatherIconSvg: string | null = null;
     private weather: Weather | null = null;
     private errorString: string | null = null;
     private weatherUpdatingInterval: number | null = null;
@@ -92,6 +93,11 @@ export default class WeatherDisplay implements m.Component<any, any> {
         const response = await sendTypedMessage(weatherRequest as CMessage<Weather>);
         this.weather = response;
 
+        const weatherIconUrl = `img/weather/${this.weather.icon}.svg`;
+        const weatherIconSvg = await fetch(weatherIconUrl).then(r => r.text());
+        this.weatherIconSvg = weatherIconSvg;
+        
+
         this.loading = false;
         weatherControl.weatherIsDirty = false;
         m.redraw();
@@ -105,15 +111,14 @@ export default class WeatherDisplay implements m.Component<any, any> {
             ]);
         } else if (this.weather) {
             const unitText = this.weather.units === WeatherUnits.Imperial ? "˚F" : "˚C"
-            const weatherIconSrc = `img/weather/${this.weather.icon}.svg`;
 
-            return m(".weather-display.flex-column", [
-                m(".flex-row", [
-                    m("img.weather-icon", {src: weatherIconSrc}),
+            return m(".weather-display.flex-column.flex-center", [
+                m(".flex-row.flex-center-cross", [
+                    m(".weather-icon.margin-right", icon(this.weatherIconSvg || Icons.SimpleWeatherCloudy)),
                     m(".weather-temp", `${this.weather.temp.toFixed(0)} ${unitText}`)
                 ]),
 
-                m(".flex-row", [
+                m(".flex-row.flex-center", [
                     m(".weather-summary", this.weather.summary)
                 ])
             ]);

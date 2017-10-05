@@ -148,7 +148,26 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                     newThemeOption("purple-theme", "Purple Theme"),
                     newThemeOption("dark-berry-theme", "Dark Berry Theme"),
                 ])
-            ])
+            ]),
+
+            m("section.flex-column", [
+                m(".margin-h", [
+                    m("h4", "Extra"),
+                    m(".form-group", [
+                        m(Switch, {
+                            checked: Options.clockSpeedDialSeparator,
+                            onchange: Options.withAttr<boolean>("checked", (o, v) => o.clockSpeedDialSeparator = v)
+                        }, "Separator Between Clock And Speed Dial"),
+                    ]),
+
+                    m(".form-group", [
+                        m(Switch, {
+                            checked: Options.clockWeatherSeparator,
+                            onchange: Options.withAttr<boolean>("checked", (o, v) => o.clockWeatherSeparator = v)
+                        }, "Separator Between Weather And Clock"),
+                    ]),
+                ]),
+            ]),
         ];
 
         return m(".minimal-options.mmt-style-options-pane", vnode.attrs, [

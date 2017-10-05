@@ -36,18 +36,19 @@ export default class App implements m.Component<any, any> {
         let weatherSection = null;
         if (Options.displayWeather) {
             weatherSection = m("section.minimal-section-weather", [
-                m(WeatherDisplay)
+                m(WeatherDisplay),
             ])
         }
 
         let clocksSection = null;
         if (Options.displayDate || Options.displayTime) {
             clocksSection = m("section.minimal-section-clocks", [
+                Options.displayWeather && Options.clockWeatherSeparator ? m(".minimal-main-separator.mmt-style-main-separator") : null,
                 m(".margin-h2", [
                     Options.displayTime ? m(TimeDisplay, { showSeconds: Options.displaySeconds }) : null,
                     Options.displayDate ? m(DateDisplay, {}) : null,
                 ]),
-                m(".minimal-main-separator.mmt-style-main-separator"),
+                Options.displaySpeedDial && Options.clockSpeedDialSeparator ? m(".minimal-main-separator.mmt-style-main-separator") : null,
             ])
         }
 
