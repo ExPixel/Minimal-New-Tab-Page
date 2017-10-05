@@ -27,7 +27,7 @@ export default class App implements m.Component<any, any> {
 
     private toggleOptions() {
         this.optionsOpen = !this.optionsOpen;
-        if (!this.optionsOpen) {
+        if (!this.optionsOpen && weatherControl.weatherSettingsDirty) {
             weatherControl.weatherIsDirty = true; // this should force weather to update once you close the options pane.
         }
     }

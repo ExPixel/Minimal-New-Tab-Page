@@ -7,6 +7,7 @@ import { icon, Icons } from "../icons/icons";
 // import WeatherService from "../../ts/weather";
 
 export const weatherControl = {
+    weatherSettingsDirty: false,
     weatherIsDirty: false
 };
 
@@ -55,6 +56,7 @@ export default class WeatherDisplay implements m.Component<any, any> {
     public onbeforeupdate() {
         if (weatherControl.weatherIsDirty) {
             weatherControl.weatherIsDirty = false;
+            weatherControl.weatherSettingsDirty = false;
             this.getCurrentWeather();
             this.setupInterval();
         }
@@ -106,7 +108,7 @@ export default class WeatherDisplay implements m.Component<any, any> {
     view() {
         if (this.errorString) {
             return m(".weather-display", [
-                m("span", icon(Icons.AlertCircle)),
+                m("span.margin-right", icon(Icons.AlertCircle)),
                 m("span", this.errorString)
             ]);
         } else if (this.weather) {
@@ -121,6 +123,11 @@ export default class WeatherDisplay implements m.Component<any, any> {
                 m(".flex-row.flex-center", [
                     m(".weather-summary", this.weather.summary)
                 ])
+            ]);
+        } else if (this.loading) {
+            return m(".weather-display", [
+                m("span.margin-right", icon(Icons.SimpleWeatherCloudy)),
+                m("span", "Loading Weather Info...")
             ]);
         }
     }

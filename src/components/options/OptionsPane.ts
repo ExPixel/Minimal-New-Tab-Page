@@ -5,6 +5,7 @@ import { icon, Icons } from "../icons/icons";
 import SpeedDialEditor from "./SpeedDialEditor";
 import { themeChangedByName } from "../../ts/theming/index";
 import { themeMap } from "../../ts/theming/theme-defs";
+import { weatherControl } from "../weather/WeatherDisplay";
 
 export interface OptionsPaneAttrs {
     isHidden: boolean;
@@ -17,6 +18,7 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
         this.setDarkSkyAPIKey = this.setDarkSkyAPIKey.bind(this);
         this.setWeatherLatitude = this.setWeatherLatitude.bind(this);
         this.setWeatherLongitude = this.setWeatherLongitude.bind(this);
+        this.onWeatherUnitSelected = this.onWeatherUnitSelected.bind(this);
     }
 
     private onThemeSelected(event: UIEvent) {
@@ -28,7 +30,18 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
         }
     }
 
+    private onWeatherUnitSelected(event: UIEvent) {
+        if (event && event.target && typeof (event.target as any)["value"] === "string") {
+            weatherControl.weatherSettingsDirty = true;
+            let unit = (event.target as any)["value"] as string;
+            if (unit !== "imperial" && unit !== "si") unit = "imperial";
+            Options.weatherInfo.units = unit;
+            Options.save();
+        }
+    }
+
     private setDarkSkyAPIKey(key: string) {
+        weatherControl.weatherSettingsDirty = true;
         Options.darkSky.apiKey = key;
         Options.save();
 
@@ -38,6 +51,7 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
     }
 
     private setWeatherLatitude(lat: string) {
+        weatherControl.weatherSettingsDirty = true;
         lat = lat.replace(/[^0-9\.\-]+/g, "");
         let f = parseFloat(lat);
         if (!Number.isFinite(f)) f = 0;
@@ -48,6 +62,7 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
     }
 
     private setWeatherLongitude(lon: string) {
+        weatherControl.weatherSettingsDirty = true;
         lon = lon.replace(/[^0-9\.\-]+/g, "");
         let f = parseFloat(lon);
         if (!Number.isFinite(f)) f = 0;
@@ -99,6 +114,24 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
 
                 Options.displayWeather ? m(".margin-top", [
                     m(".form-group", [
+                        m("label.form-label", "Units"),
+                        m("select", {
+                            value: Options.weatherInfo.units,
+                            onchange: this.onWeatherUnitSelected
+                        }, [
+                            m("option", {
+                                value: "imperial",
+                                selected: Options.weatherInfo.units === "imperial"
+                            }, "Imperial (Fahrenheit, Miles, ect..)"),
+
+                            m("option", {
+                                value: "si",
+                                selected: Options.weatherInfo.units === "si"
+                            }, "SI (Celcius, Kilometers, ect..)")
+                        ])
+                    ]),
+
+                    m(".form-group", [
                         m("label.form-label", "Latitude"),
                         m("input.form-input.style-options-input", {
                             type: "text",
@@ -124,6 +157,8 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                             oninput: m.withAttr("value", this.setDarkSkyAPIKey),
                         })
                     ]),
+
+                    weatherControl.weatherSettingsDirty ? m("small.form-group", "Close Options To Update Weather") : null
                 ]) : null
             ]),
 
