@@ -3,6 +3,8 @@ Minimal New Tab Page
 
 Minimal new tab page extension for Chrome.
 
+[Download the extension here.](https://chrome.google.com/webstore/detail/minimal-new-tab/oefebaomaahemfkgjdeaokigmcflbfna)
+
 Screenshots
 ---
 
