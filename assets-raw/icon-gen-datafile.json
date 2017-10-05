@@ -1,26 +1,26 @@
 [
     {
-        "input": [ "minimalnewtab-icon.svg" ],
-        "output": [ "../assets/icons/minimalnewtab-icon-16.png", "16:16" ]
+        "input": [ "minimalnewtab-icon.svg", "100%", "16:16" ],
+        "output": [ "../assets/icons/minimalnewtab-icon-16.png" ]
     },
 
     {
-        "input": [ "minimalnewtab-icon.svg" ],
-        "output": [ "../assets/icons/minimalnewtab-icon-32.png", "32:32" ]
+        "input": [ "minimalnewtab-icon.svg", "100%", "32:32" ],
+        "output": [ "../assets/icons/minimalnewtab-icon-32.png" ]
     },
 
     {
-        "input": [ "minimalnewtab-icon.svg" ],
-        "output": [ "../assets/icons/minimalnewtab-icon-48.png", "48:48" ]
+        "input": [ "minimalnewtab-icon.svg", "100%", "48:48" ],
+        "output": [ "../assets/icons/minimalnewtab-icon-48.png" ]
     },
 
     {
-        "input": [ "minimalnewtab-icon.svg" ],
-        "output": [ "../assets/icons/minimalnewtab-icon-64.png", "64:64" ]
+        "input": [ "minimalnewtab-icon.svg", "100%", "64:64" ],
+        "output": [ "../assets/icons/minimalnewtab-icon-64.png" ]
     },
 
     {
-        "input": [ "minimalnewtab-icon.svg" ],
-        "output": [ "../assets/icons/minimalnewtab-icon-128.png", "128:128" ]
+        "input": [ "minimalnewtab-icon.svg", "100%", "128:128" ],
+        "output": [ "../assets/icons/minimalnewtab-icon-128.png" ]
     }
 ]
