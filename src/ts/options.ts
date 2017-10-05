@@ -8,7 +8,7 @@ const OPTIONS_LS_KEY = "options";
 export class Options {
     public displayTime: boolean = true;
     public displayDate: boolean = true;
-    public displayWeather: boolean = true;
+    public displayWeather: boolean = false;
     public displaySpeedDial: boolean = true;
     public displaySeconds: boolean = false;
     public selectedThemeName: string = defaultThemeName;
