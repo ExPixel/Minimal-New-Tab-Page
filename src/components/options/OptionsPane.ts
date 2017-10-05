@@ -4,6 +4,7 @@ import Switch from "../misc/Switch";
 import { icon, Icons } from "../icons/icons";
 import SpeedDialEditor from "./SpeedDialEditor";
 import { themeChangedByName } from "../../ts/theming/index";
+import { themeMap } from "../../ts/theming/theme-defs";
 
 export interface OptionsPaneAttrs {
     isHidden: boolean;
@@ -61,12 +62,13 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
             return m("section.flex-column.margin-h", [m("h4", title)].concat(contents));
         };
 
-        const newThemeOption = (shortname: string, longname: string) => {
-            return m("option", {
-                value: shortname,
-                selected: Options.selectedThemeName === shortname
-            }, longname);
-        };
+        const themeOptions = [];
+        for (const theme of themeMap.values()) {
+            themeOptions.push(m("option", {
+                value: theme.shortname,
+                selected: Options.selectedThemeName === theme.shortname
+            }, theme.name));
+        }
 
         const sections = [
             m("section.flex-column.margin-h", [
@@ -142,12 +144,7 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                 m("select", {
                     value: Options.selectedThemeName,
                     onchange: this.onThemeSelected
-                }, [
-                    newThemeOption("dark-theme", "Dark Theme"),
-                    newThemeOption("light-theme", "Light Theme"),
-                    newThemeOption("purple-theme", "Purple Theme"),
-                    newThemeOption("dark-berry-theme", "Dark Berry Theme"),
-                ])
+                }, themeOptions)
             ]),
 
             m("section.flex-column", [

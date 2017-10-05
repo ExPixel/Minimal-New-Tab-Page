@@ -1,4 +1,6 @@
 export interface IMinimalTheme {
+    name: string,
+    shortname: string,
     backgroundColor: string;
     backgroundColorDark: string;
     textColor: string;
@@ -15,6 +17,8 @@ export const themeKeys = [
 ];
 
 const darkTheme: IMinimalTheme = {
+    name: "Dark Theme",
+    shortname: "dark-theme",
     backgroundColor: "#343a40",
     backgroundColorDark: "#212529",
     textColor: "#f8f9fa",
@@ -23,6 +27,8 @@ const darkTheme: IMinimalTheme = {
 };
 
 const lightTheme: IMinimalTheme = {
+    name: "Light Theme",
+    shortname: "light-theme",
     backgroundColor: "#f8f9fa",
     backgroundColorDark: "#e9ecef",
     textColor: "#343a40",
@@ -31,6 +37,8 @@ const lightTheme: IMinimalTheme = {
 };
 
 const purpleTheme: IMinimalTheme = {
+    name: "Purple Theme",
+    shortname: "purple-theme",
     backgroundColor: "#71397C",
     backgroundColorDark: "#60366F",
     textColor: "#f8f9fa",
@@ -39,6 +47,8 @@ const purpleTheme: IMinimalTheme = {
 };
 
 const darkBerryTheme: IMinimalTheme = {
+    name: "Dark Berry Theme",
+    shortname: "dark-berry-theme",
     backgroundColor: "#900C3F",
     backgroundColorDark: "#581845",
     textColor: "#f8f9fa",
@@ -46,7 +56,19 @@ const darkBerryTheme: IMinimalTheme = {
     accentColor: "#FF5733"
 };
 
+const mignightRedTheme: IMinimalTheme = {
+    name: "Midnight Red Theme",
+    shortname: "midnight-red-theme",
+    backgroundColor: "#2B2E4A",
+    backgroundColorDark: "#53354A",
+    textColor: "#f8f9fa",
+    metaColor: "rgba(255, 255, 255, 0.6)",
+    accentColor: "#E84545"
+};
+
 export const customTheme: IMinimalTheme = {
+    name: "Custom Theme",
+    shortname: "custom-theme",
     backgroundColor: "#f8f9fa",
     backgroundColorDark: "#e9ecef",
     textColor: "#343a40",
@@ -55,10 +77,11 @@ export const customTheme: IMinimalTheme = {
 };
 
 export const themeMap = new Map([
-    ["dark-theme", darkTheme],
-    ["light-theme", lightTheme],
-    ["purple-theme", purpleTheme],
-    ["dark-berry-theme", darkBerryTheme]
+    [darkTheme.shortname, darkTheme],
+    [lightTheme.shortname, lightTheme],
+    [purpleTheme.shortname, purpleTheme],
+    [darkBerryTheme.shortname, darkBerryTheme],
+    [mignightRedTheme.shortname, mignightRedTheme]
 ]);
 
 export const defaultThemeName = "dark-theme";
