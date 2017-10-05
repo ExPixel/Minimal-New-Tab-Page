@@ -6,6 +6,10 @@ import Options from "../../ts/options";
 import { icon, Icons } from "../icons/icons";
 // import WeatherService from "../../ts/weather";
 
+export const weatherControl = {
+    weatherIsDirty: false
+};
+
 export default class WeatherDisplay implements m.Component<any, any> {
     private loading: boolean = false;
     private weather: Weather | null = null;
@@ -47,6 +51,14 @@ export default class WeatherDisplay implements m.Component<any, any> {
         this.clearInterval();
     }
 
+    public onbeforeupdate() {
+        if (weatherControl.weatherIsDirty) {
+            weatherControl.weatherIsDirty = false;
+            this.getCurrentWeather();
+            this.setupInterval();
+        }
+    }
+
     private async getCurrentWeather() {
         if (this.loading) return;
         this.loading = true;
@@ -81,6 +93,7 @@ export default class WeatherDisplay implements m.Component<any, any> {
         this.weather = response;
 
         this.loading = false;
+        weatherControl.weatherIsDirty = false;
         m.redraw();
     }
 

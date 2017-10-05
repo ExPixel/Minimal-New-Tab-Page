@@ -2,7 +2,7 @@ import m = require("mithril");
 
 import TimeDisplay from "./TimeDisplay";
 import DateDisplay from "./DateDisplay";
-import WeatherDisplay from "./weather/WeatherDisplay";
+import WeatherDisplay, { weatherControl } from "./weather/WeatherDisplay";
 import SpeedDialList from "./speed-dial/SpeedDialList";
 import OptionsPane from "./options/OptionsPane";
 import Options from "../ts/options";
@@ -27,6 +27,9 @@ export default class App implements m.Component<any, any> {
 
     private toggleOptions() {
         this.optionsOpen = !this.optionsOpen;
+        if (!this.optionsOpen) {
+            weatherControl.weatherIsDirty = true; // this should force weather to update once you close the options pane.
+        }
     }
 
     view() {
