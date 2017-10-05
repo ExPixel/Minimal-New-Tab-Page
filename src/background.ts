@@ -1,3 +1,4 @@
+import { getCurrentWeather, CurrentWeatherRequest } from "./ts/weather";
 import { CMessage, isCMessage, CMessageType, CTimeRequest } from "./ts/messaging";
 
 async function handleCMessage(request: CMessage<any>, sendResponse: (resp: any) => any) {
@@ -5,6 +6,13 @@ async function handleCMessage(request: CMessage<any>, sendResponse: (resp: any) 
         case CMessageType.TimeRequest: {
             // const timeRequest: CTimeRequest = request;
             sendResponse(Date.now());
+            break;
+        }
+
+        case CMessageType.WeatherRequest: {
+            const weatherRequest = request as CurrentWeatherRequest;
+            const weather = await getCurrentWeather(weatherRequest);
+            sendResponse(weather);
             break;
         }
 
@@ -18,7 +26,7 @@ async function handleCMessage(request: CMessage<any>, sendResponse: (resp: any) 
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (!isCMessage(request)) {
-        sendResponse(null);
+        sendResponse("<<BAD MESSAGE>>");
         return false;
     } else {
         handleCMessage(request, sendResponse);
