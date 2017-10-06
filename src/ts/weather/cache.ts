@@ -4,7 +4,7 @@ import MStorage from "../storage";
 
 const WEATHER_REQUEST_LS_KEY = "weather.cache.request";
 const WEATHER_RESPONSE_LS_KEY = "weather.cache.response";
-const WEATHER_REQUEST_CACHE_TIME = 1 * (3600000); // X (hours)
+const WEATHER_REQUEST_CACHE_TIME = 30 * (60000); // X (minutes)
 
 /**
  * Tries to get a weather request from the cache if it is available.
