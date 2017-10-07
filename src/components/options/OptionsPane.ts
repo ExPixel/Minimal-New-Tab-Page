@@ -165,12 +165,24 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
             m("section.flex-column", [
                 m(".margin-h", [
                     m("h4", "SpeedDial"),
-                    m(Switch, {
-                        checked: Options.displaySpeedDial,
-                        onchange: Options.withAttr<boolean>("checked", (o, v) => o.displaySpeedDial = v)
-                    }, "Display Speed Dial"),
-                ]),
+                    m(".form-group", [
+                        m(Switch, {
+                            checked: Options.displaySpeedDial,
+                            onchange: Options.withAttr<boolean>("checked", (o, v) => o.displaySpeedDial = v)
+                        }, "Display Speed Dial"),
+                    ]),
 
+                    m(".form-group", [
+                        m("label.form-label", "Item Width"),
+                        m("input.form-input.style-options-input", {
+                            value: Options.speedDialItemWidth,
+                            type: "number", max: 1024, min: 32, step: 1,
+                            onchange: Options.withAttr<string>("value", (o, v) => {
+                                o.speedDialItemWidth = Math.max(Math.min(parseInt(v) || 160, 1024), 32);
+                            })
+                        }),
+                    ])
+                ]),
                 m(SpeedDialEditor, {isHidden: vnode.attrs.isHidden})
             ]),
 

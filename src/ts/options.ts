@@ -20,6 +20,8 @@ export class Options {
     public weatherInfo = { latitude: 0, longitude: 0, units: "imperial" };
     public darkSky = { apiKey: "" };
 
+    public speedDialItemWidth: number = 160;
+
     public checkThemeMatch() {
     }
 
