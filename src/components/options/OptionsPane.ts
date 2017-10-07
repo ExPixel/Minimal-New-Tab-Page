@@ -179,7 +179,7 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                             value: Options.speedDialItemWidth,
                             type: "number", max: 1024, min: 32, step: 1,
                             onchange: Options.withAttr<string>("value", (o, v) => {
-                                o.speedDialItemWidth = Math.max(Math.min(parseInt(v) || 160, 1024), 32);
+                                o.speedDialItemWidth = clamp(parseInt(v) || 32, 32, 1024);
                             })
                         }),
                     ]),
