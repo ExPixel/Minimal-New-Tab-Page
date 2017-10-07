@@ -21,6 +21,7 @@ export class Options {
     public darkSky = { apiKey: "" };
 
     public speedDialItemWidth: number = 160;
+    public speedDialSectionWidth: number = 3;
 
     public checkThemeMatch() {
     }

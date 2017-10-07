@@ -6,6 +6,7 @@ import SpeedDialEditor from "./SpeedDialEditor";
 import { themeChangedByName } from "../../ts/theming/index";
 import { themeMap } from "../../ts/theming/theme-defs";
 import { weatherControl } from "../weather/WeatherDisplay";
+import { clamp } from "../../ts/util";
 
 export interface OptionsPaneAttrs {
     isHidden: boolean;
@@ -181,7 +182,18 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                                 o.speedDialItemWidth = Math.max(Math.min(parseInt(v) || 160, 1024), 32);
                             })
                         }),
-                    ])
+                    ]),
+                    
+                    m(".form-group", [
+                        m("label.form-label", "Speed Dial Section Width"),
+                        m("input.form-input.style-options-input", {
+                            value: Options.speedDialSectionWidth,
+                            type: "number", max: 8, min: 1, step: 1,
+                            onchange: Options.withAttr<string>("value", (o, v) => {
+                                o.speedDialSectionWidth = clamp(parseInt(v) || 1, 1, 8);
+                            })
+                        }),
+                    ]),
                 ]),
                 m(SpeedDialEditor, {isHidden: vnode.attrs.isHidden})
             ]),
