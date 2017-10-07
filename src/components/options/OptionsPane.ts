@@ -174,12 +174,26 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                     ]),
 
                     m(".form-group", [
+                        m(Switch, {
+                            checked: Options.speedDial.showURL,
+                            onchange: Options.withAttr<boolean>("checked", (o, v) => o.speedDial.showURL = v)
+                        }, "Display Item URLs"),
+                    ]),
+
+                    m(".form-group", [
+                        m(Switch, {
+                            checked: Options.speedDial.showFavIcon,
+                            onchange: Options.withAttr<boolean>("checked", (o, v) => o.speedDial.showFavIcon = v)
+                        }, "Display Item FavIcons"),
+                    ]),
+
+                    m(".form-group", [
                         m("label.form-label", "Item Width"),
                         m("input.form-input.style-options-input", {
-                            value: Options.speedDialItemWidth,
+                            value: Options.speedDial.itemWidth,
                             type: "number", max: 1024, min: 32, step: 1,
                             onchange: Options.withAttr<string>("value", (o, v) => {
-                                o.speedDialItemWidth = clamp(parseInt(v) || 32, 32, 1024);
+                                o.speedDial.itemWidth = clamp(parseInt(v) || 32, 32, 1024);
                             })
                         }),
                     ]),
@@ -187,10 +201,10 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                     m(".form-group", [
                         m("label.form-label", "Speed Dial Section Width"),
                         m("input.form-input.style-options-input", {
-                            value: Options.speedDialSectionWidth,
+                            value: Options.speedDial.sectionWidth,
                             type: "number", max: 8, min: 1, step: 1,
                             onchange: Options.withAttr<string>("value", (o, v) => {
-                                o.speedDialSectionWidth = clamp(parseInt(v) || 1, 1, 8);
+                                o.speedDial.sectionWidth = clamp(parseInt(v) || 1, 1, 8);
                             })
                         }),
                     ]),

@@ -70,6 +70,17 @@ ul.speed-dial-list {
             width: 100%;
             text-align: center;
         }
+
+        .speed-dial-list-favicon {
+            width: 1em;
+            height: 1em;
+            vertical-align: middle;
+            
+
+            &.add-margin {
+                margin-right: 4px;
+            }
+        }
     }
 }
 

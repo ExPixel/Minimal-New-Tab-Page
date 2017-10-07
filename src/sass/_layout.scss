@@ -56,7 +56,8 @@
 .padding-top    { padding-top: $padding-layout; }
 .padding-bottom { padding-bottom: $padding-layout; }
 
-.margin-h2       { margin-left: $padding-layout * 2; margin-right: $padding-layout * 2; }
+.half-padding-v { padding-top: $padding-layout / 2; padding-bottom: $padding-layout / 2; }
+.margin-h2      { margin-left: $padding-layout * 2; margin-right: $padding-layout * 2; }
 
 .scroll-y {
     overflow-y: auto;

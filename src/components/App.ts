@@ -57,7 +57,7 @@ export default class App implements m.Component<any, any> {
         if (Options.displaySpeedDial && SpeedDial.getItems().length > 0) {
             speedDialSection = m("section.minimal-section-speed-dial.flex-stretch-self.flex-row", [
                 m("div.flex-1.hide-lt-sm"),
-                m(`div.flex-${clamp(Options.speedDialSectionWidth, 1, 8)}.flex-layout`,
+                m(`div.flex-${clamp(Options.speedDial.sectionWidth, 1, 8)}.flex-layout`,
                     m(".flex-1.flex-row.flex-center", [m(SpeedDialList)])
                 ),
                 m("div.flex-1.hide-lt-sm"),

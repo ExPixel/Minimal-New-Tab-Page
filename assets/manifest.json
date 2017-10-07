@@ -18,6 +18,7 @@
     },
 
     "permissions": [
+        "chrome://favicon/**/*",
         "https://*.darksky.net/",
         "http://*.darksky.net/"
     ],

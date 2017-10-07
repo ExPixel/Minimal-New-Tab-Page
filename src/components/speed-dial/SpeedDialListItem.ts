@@ -11,8 +11,22 @@ export default class SpeedDialListItem implements m.Component<ISpeedDialListItem
     constructor() {
     }
 
+    public getFavIconURL(url?: string | null) {
+        if (url) {
+            try {
+                new URL(url); // just makes sure it's valid.
+                const hashIndex = url.indexOf("#");
+                if (hashIndex >= 0) { url = url.substring(0, hashIndex); }
+                return "chrome://favicon/size/16@2x/" + url;
+            } catch(e) {
+                console.error("Failed to get FavIcon for URL: " + url);
+            }
+        }
+        return "chrome://favicon";
+    }
+
     public view(vnode: m.Vnode<ISpeedDialListItemAttrs, any>) {
-        const width = clamp(Options.speedDialItemWidth, 32, 1024);
+        const width = clamp(Options.speedDial.itemWidth, 32, 1024);
         return m("li.speed-dial-list-item.mmt-style-speed-item", {
             style: `width: ${width}px; max-width: ${width}px;`,
             onclick: (event: MouseEvent) => {
@@ -26,9 +40,17 @@ export default class SpeedDialListItem implements m.Component<ISpeedDialListItem
             },
             title: vnode.attrs.itemTitle
         }, [
-            m("span.speed-dial-list-item-title.mmt-style-speed-item-title", vnode.attrs.itemTitle),
-            m("span.speed-dial-list-item-url.mmt-style-speed-item-url",
-                vnode.attrs.itemUrl ? extractURLHost(vnode.attrs.itemUrl) : "———")
+            m("span.speed-dial-list-item-title.mmt-style-speed-item-title", {
+                class: (!Options.speedDial.showFavIcon && !Options.speedDial.showURL) ? "half-padding-v" : ""
+            }, vnode.attrs.itemTitle),
+            m("span.speed-dial-list-item-url.mmt-style-speed-item-url", [
+                Options.speedDial.showFavIcon ? m("img.speed-dial-list-favicon", {
+                    class: Options.speedDial.showURL ? "add-margin" : "",
+                    src: this.getFavIconURL(vnode.attrs.itemUrl)
+                }) : null,
+
+                Options.speedDial.showURL ? (vnode.attrs.itemUrl ? extractURLHost(vnode.attrs.itemUrl) : "———") : null
+            ])
         ]);
     }
 }
