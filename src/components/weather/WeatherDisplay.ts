@@ -4,6 +4,7 @@ import { sendTypedMessage, CMessage } from "../../ts/messaging";
 import { CurrentWeatherRequest, WeatherRequestMetadata, WeatherServiceType } from "../../ts/weather/index";
 import Options from "../../ts/options";
 import { icon, Icons } from "../icons/icons";
+import { RelativeTimeLabel } from "../RelativeTimeLabel";
 // import WeatherService from "../../ts/weather";
 
 export const weatherControl = {
@@ -122,7 +123,14 @@ export default class WeatherDisplay implements m.Component<any, any> {
 
                 m(".flex-row.flex-center", [
                     m(".weather-summary", this.weather.summary)
-                ])
+                ]),
+
+                Options.weather.showLastUpdateTime ? m(".flex-row.flex-center", [
+                    m(RelativeTimeLabel, {
+                        span: { class: "weather-timestamp mmt-style-meta-text" },
+                        from: this.weather.created
+                    })
+                ]) : null
             ]);
         } else if (this.loading) {
             return m(".weather-display", [

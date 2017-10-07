@@ -217,7 +217,8 @@ export class DSWeatherService implements WeatherService {
             lowTemp: dsWeather.currently.temperatureLow,
             icon: this.convertDSIconToMIcon(dsWeather.currently.icon),
             units,
-            summary: dsWeather.currently.summary!
+            summary: dsWeather.currently.summary!,
+            created: Date.now()
         };
     }
 }

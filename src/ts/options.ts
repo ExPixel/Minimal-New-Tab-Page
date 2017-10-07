@@ -20,6 +20,10 @@ export class Options {
     public weatherInfo = { latitude: 0, longitude: 0, units: "imperial" };
     public darkSky = { apiKey: "" };
 
+    public weather = {
+        showLastUpdateTime: true,
+    };
+
     public speedDial = {
         itemWidth: 160,
         sectionWidth: 3,

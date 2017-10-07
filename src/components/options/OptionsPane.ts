@@ -108,10 +108,19 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
 
             m("section.flex-column.margin-h", [
                 m("h4", "Weather"),
-                m(Switch, {
-                    checked: Options.displayWeather,
-                    onchange: Options.withAttr<boolean>("checked", (o, v) => o.displayWeather = v)
-                }, "Display Weather"),
+                m(".form-group", [
+                    m(Switch, {
+                        checked: Options.displayWeather,
+                        onchange: Options.withAttr<boolean>("checked", (o, v) => o.displayWeather = v)
+                    }, "Display Weather")]
+                ),
+
+                m(".form-group", [
+                    m(Switch, {
+                        checked: Options.weather.showLastUpdateTime,
+                        onchange: Options.withAttr<boolean>("checked", (o, v) => Options.weather.showLastUpdateTime = v)
+                    }, "Show Last Updated Time")]
+                ),
 
                 Options.displayWeather ? m(".margin-top", [
                     m(".form-group", [

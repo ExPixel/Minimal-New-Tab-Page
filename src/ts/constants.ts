@@ -1,1 +1,1 @@
-export const WEATHER_API_VERSION: number = 0;
+export const WEATHER_API_VERSION: number = 1;

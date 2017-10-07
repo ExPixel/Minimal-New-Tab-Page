@@ -21,6 +21,7 @@ export interface Weather {
     icon: WeatherIcon;
     locationName?: string;
     units: WeatherUnits;
+    created: number;
 }
 
 export interface WeatherService {
