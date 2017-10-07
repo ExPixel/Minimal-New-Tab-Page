@@ -26,8 +26,10 @@ Development &amp; Building
 Help
 ---
 
-- **Fav Icons aren't displaying correctly on the speed dial**
+- **Fav Icons aren't displaying correctly on the speed dial**  
     Unfortunately this is just an issue that comes with using `chrome://favicon`. The URLs required to get the correct favicon can be very specific. I would try adding `https://`, `http://`, or some other protocol if you haven't already. You should also try adding `www.` to the beginning of a URL if it will still continue working after you do so. This fixes the favicon in the case of `google.com`. `https://google.com` probably won't work but `https://www.google.com` will.
+- **Using Dark Sky**  
+    At the moment I only support [Dark Sky](https://darksky.net) for the weather widget, but I'm open to adding other backends if they're not too much trouble. You'll need a latitude/longitude (which you can obtain from [here](https://www.latlong.net/convert-address-to-lat-long.html)) as well as a Dark Sky secret key. You'll have to make an account [here](https://darksky.net/dev) and then navigate to the [console](https://darksky.net/dev/account) in order to to obtain the key. At the moment I don't have an available server to set up as a proxy to the API so you'll need your own key.
 
 Credits
 ---
