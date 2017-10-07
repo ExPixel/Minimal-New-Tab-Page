@@ -23,6 +23,12 @@ Development &amp; Building
 
 - **Packaing for Chrome Web Store:** To package the extension for uploading to the Chrome Web Store, simply run `yarn run pkg` or `npm run pkg` to create a zip file with the name `minimalnewtab-[version].zip` in the `builds` directory. The zip file can be uploaded on the Chrome Web Store.
 
+Help
+---
+
+- **Fav Icons aren't displaying correctly on the speed dial**
+    Unfortunately this is just an issue that comes with using `chrome://favicon`. The URLs required to get the correct favicon can be very specific. I would try adding `https://`, `http://`, or some other protocol if you haven't already. You should also try adding `www.` to the beginning of a URL if it will still continue working after you do so. This fixes the favicon in the case of `google.com`. `https://google.com` probably won't work but `https://www.google.com` will.
+
 Credits
 ---
 
