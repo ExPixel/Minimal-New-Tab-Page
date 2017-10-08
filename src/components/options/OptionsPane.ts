@@ -7,6 +7,7 @@ import { themeChangedByName } from "../../ts/theming/index";
 import { themeMap } from "../../ts/theming/theme-defs";
 import { weatherControl } from "../weather/WeatherDisplay";
 import { clamp } from "../../ts/util";
+import { FONT_SIZE_MIN, FONT_SIZE_MAX, SD_SECTION_WIDTH_MIN, SD_SECTION_WIDTH_MAX, SD_ITEM_WIDTH_MAX, SD_ITEM_WIDTH_MIN } from "../../ts/constants";
 
 export interface OptionsPaneAttrs {
     isHidden: boolean;
@@ -200,9 +201,9 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                         m("label.form-label", "Item Width"),
                         m("input.form-input.style-options-input", {
                             value: Options.speedDial.itemWidth,
-                            type: "number", max: 1024, min: 32, step: 1,
+                            type: "number", max: SD_ITEM_WIDTH_MAX, min: SD_ITEM_WIDTH_MIN, step: 1,
                             onchange: Options.withAttr<string>("value", (o, v) => {
-                                o.speedDial.itemWidth = clamp(parseInt(v) || 32, 32, 1024);
+                                o.speedDial.itemWidth = clamp(parseInt(v) || SD_ITEM_WIDTH_MIN, SD_ITEM_WIDTH_MIN, SD_ITEM_WIDTH_MAX);
                             })
                         }),
                     ]),
@@ -211,9 +212,9 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                         m("label.form-label", "Speed Dial Section Width"),
                         m("input.form-input.style-options-input", {
                             value: Options.speedDial.sectionWidth,
-                            type: "number", max: 8, min: 1, step: 1,
+                            type: "number", max: SD_SECTION_WIDTH_MAX, min: SD_SECTION_WIDTH_MIN, step: 1,
                             onchange: Options.withAttr<string>("value", (o, v) => {
-                                o.speedDial.sectionWidth = clamp(parseInt(v) || 1, 1, 8);
+                                o.speedDial.sectionWidth = clamp(parseInt(v) || SD_SECTION_WIDTH_MIN, SD_SECTION_WIDTH_MIN, SD_SECTION_WIDTH_MAX);
                             })
                         }),
                     ]),
@@ -246,9 +247,9 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                     m("label.form-label", "Font Size (px)"),
                     m("input.form-input.style-options-input", {
                         value: Options.appearance.fontSize,
-                        type: "number", max: 72, min: 8, step: 1,
+                        type: "number", max: FONT_SIZE_MAX, min: FONT_SIZE_MIN, step: 1,
                         onchange: Options.withAttr<string>("value", (o, v) => {
-                            o.appearance.fontSize = clamp(parseInt(v) || 8, 8, 72);
+                            o.appearance.fontSize = clamp(parseInt(v) || FONT_SIZE_MIN, FONT_SIZE_MIN, FONT_SIZE_MAX);
                             o.loadAppearanceStylesheet();
                         })
                     })

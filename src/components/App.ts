@@ -9,6 +9,7 @@ import Options from "../ts/options";
 import SpeedDial from "../ts/speed-dial";
 import { icon, Icons } from "./icons/icons";
 import { clamp } from "../ts/util";
+import { SD_SECTION_WIDTH_MIN, SD_SECTION_WIDTH_MAX } from "../ts/constants";
 
 export default class App implements m.Component<any, any> {
     private optionsOpen: boolean = false;
@@ -57,7 +58,7 @@ export default class App implements m.Component<any, any> {
         if (Options.displaySpeedDial && SpeedDial.getItems().length > 0) {
             speedDialSection = m("section.minimal-section-speed-dial.flex-stretch-self.flex-row", [
                 m("div.flex-1.hide-lt-sm"),
-                m(`div.flex-${clamp(Options.speedDial.sectionWidth, 1, 8)}.flex-layout`,
+                m(`div.flex-${clamp(Options.speedDial.sectionWidth, SD_SECTION_WIDTH_MIN, SD_SECTION_WIDTH_MAX)}.flex-layout`,
                     m(".flex-1.flex-row.flex-center", [m(SpeedDialList)])
                 ),
                 m("div.flex-1.hide-lt-sm"),

@@ -3,6 +3,7 @@ import MStorage from "./storage";
 import { defaultThemeName } from "./theming/theme-defs";
 import { checkThemeMatch, loadMinimalThemeStylesheet } from "./theming/index";
 import { clamp } from "./util";
+import { FONT_SIZE_MIN, FONT_SIZE_MAX } from "./constants";
 
 const OPTIONS_LS_KEY = "options";
 
@@ -39,7 +40,7 @@ export class Options {
 
     public loadAppearanceStylesheet() {
         const remBase = 10;
-        const fontSizePx = clamp(this.appearance.fontSize, 8, 72);
+        const fontSizePx = clamp(this.appearance.fontSize, FONT_SIZE_MIN, FONT_SIZE_MAX);
         const fontSize = (fontSizePx / remBase).toFixed(4);
         let fontFamily: string;
         if (this.appearance.fontFamily && this.appearance.fontFamily.trim().length > 0) {

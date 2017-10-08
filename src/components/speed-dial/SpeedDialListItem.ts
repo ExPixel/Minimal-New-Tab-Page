@@ -1,6 +1,7 @@
 import m = require("mithril");
 import { extractURLHost, clamp } from "../../ts/util";
 import Options from "../../ts/options";
+import { SD_ITEM_WIDTH_MIN, SD_ITEM_WIDTH_MAX } from "../../ts/constants";
 
 export interface ISpeedDialListItemAttrs {
     itemTitle?: string | m.Vnode<any, any> | null;
@@ -26,7 +27,7 @@ export default class SpeedDialListItem implements m.Component<ISpeedDialListItem
     }
 
     public view(vnode: m.Vnode<ISpeedDialListItemAttrs, any>) {
-        const width = clamp(Options.speedDial.itemWidth, 32, 1024);
+        const width = clamp(Options.speedDial.itemWidth, SD_ITEM_WIDTH_MIN, SD_ITEM_WIDTH_MAX);
         return m("li.speed-dial-list-item.mmt-style-speed-item", {
             style: `width: ${width}px; max-width: ${width}px;`,
             onclick: (event: MouseEvent) => {
