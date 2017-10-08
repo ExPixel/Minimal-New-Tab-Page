@@ -1,7 +1,8 @@
 import m = require("mithril");
 import MStorage from "./storage";
 import { defaultThemeName } from "./theming/theme-defs";
-import { checkThemeMatch } from "./theming/index";
+import { checkThemeMatch, loadMinimalThemeStylesheet } from "./theming/index";
+import { clamp } from "./util";
 
 const OPTIONS_LS_KEY = "options";
 
@@ -31,7 +32,28 @@ export class Options {
         showFavIcon: true
     };
 
-    public checkThemeMatch() {
+    public appearance = {
+        fontSize: 13,
+        fontFamily: ""
+    };
+
+    public loadAppearanceStylesheet() {
+        const remBase = 10;
+        const fontSizePx = clamp(this.appearance.fontSize, 8, 72);
+        const fontSize = (fontSizePx / remBase).toFixed(4);
+        let fontFamily: string;
+        if (this.appearance.fontFamily && this.appearance.fontFamily.trim().length > 0) {
+            fontFamily = `"${this.appearance.fontFamily.trim()}", `;
+        } else {
+            fontFamily = "";
+        }
+        loadMinimalThemeStylesheet("minimal-appearance", `
+            #minimal-app-main {
+                font-family: ${fontFamily}-apple-system, BlinkMacSystemFont, "Segoe UI", 'Roboto', 'Helvetica', sans-serif;
+                font-size: ${fontSize}rem;
+            }
+        `);
+        console.log("Loaded appearance stylesheet.");
     }
 
     public edit(f: (o: Options) => any) {

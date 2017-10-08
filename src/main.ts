@@ -10,6 +10,7 @@ import App from "./components/App";
 // (window as any).Weather = Weather;
 
 Options.load();
+Options.loadAppearanceStylesheet();
 SpeedDial.load();
 const root = document.getElementById('app')!;
 m.mount(root, App);

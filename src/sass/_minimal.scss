@@ -213,7 +213,7 @@ $options-text-color: #f8f9fa;
 // WEATHER
 .weather-display {
     .weather-icon {
-        font-size: 6.0rem;
+        font-size: 5.0em;
         
         // This fixes a bug where the SVGs for the weather icons
         // are being cut off on the sides. I'm not sure what causes this at the moment.
@@ -223,12 +223,12 @@ $options-text-color: #f8f9fa;
     }
 
     .weather-temp {
-        font-size: 2.6rem;
+        font-size: 2.4em;
     }
 
     .weather-summary {
         text-align: center;
-        font-size: 1.8rem;
+        font-size: 1.6em;
     }
 
     .weather-timestamp {

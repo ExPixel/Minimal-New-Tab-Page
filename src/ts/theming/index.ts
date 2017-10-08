@@ -10,7 +10,7 @@ const fs: FileSystem = require("fs");
 const THEME_LS_KEY = "theme";
 const MINIMAL_THEME_STYLESHEET_ID = "mmt-theming";
 
-function loadMinimalThemeStylesheet(sheetId: string, source: string) {
+export function loadMinimalThemeStylesheet(sheetId: string, source: string) {
     const found = document.querySelector(`head > style[data-sheetId="${sheetId}"]`);
     if (found) {
         found.innerHTML = source;

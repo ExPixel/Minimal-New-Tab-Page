@@ -222,11 +222,37 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
             ]),
 
             m("section.flex-column.margin-h", [
-                m("h4", "Theme"),
-                m("select", {
-                    value: Options.selectedThemeName,
-                    onchange: this.onThemeSelected
-                }, themeOptions)
+                m("h4", "Appearance"),
+                m(".form-group", [
+                    m("label.form-label", "Theme"),
+                    m("select", {
+                        value: Options.selectedThemeName,
+                        onchange: this.onThemeSelected
+                    }, themeOptions)
+                ]),
+
+                m(".form-group", [
+                    m("label.form-label", "Font Family"),
+                    m("input.form-input.style-options-input", {
+                        value: Options.appearance.fontFamily,
+                        onchange: Options.withAttr<string>("value", (o, v) => {
+                            o.appearance.fontFamily = v;
+                            o.loadAppearanceStylesheet();
+                        })
+                    })
+                ]),
+
+                m(".form-group", [
+                    m("label.form-label", "Font Size (px)"),
+                    m("input.form-input.style-options-input", {
+                        value: Options.appearance.fontSize,
+                        type: "number", max: 72, min: 8, step: 1,
+                        onchange: Options.withAttr<string>("value", (o, v) => {
+                            o.appearance.fontSize = clamp(parseInt(v) || 8, 8, 72);
+                            o.loadAppearanceStylesheet();
+                        })
+                    })
+                ]),
             ]),
 
             m("section.flex-column", [

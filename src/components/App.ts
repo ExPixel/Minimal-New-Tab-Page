@@ -76,7 +76,7 @@ export default class App implements m.Component<any, any> {
         return m("div.app-container.mmt-style-app.flex-row", [
              optionsPage,
 
-            m("div.flex-1.flex-column", 
+            m("div.flex-1.flex-column", {id: "minimal-app-main"}, [
                 // Main Content In Center
                 m("div.flex-1.flex-column.flex-center.flex-center-cross.minimal-sections.scroll-y", [
                     weatherSection,
@@ -90,7 +90,7 @@ export default class App implements m.Component<any, any> {
                         class: "" + (this.optionsOpen ? "selected" : "")
                     }, icon(Icons.Settings))
                 ])
-            )
+            ])
         ]);
     }
 }

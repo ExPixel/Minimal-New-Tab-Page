@@ -118,7 +118,7 @@ export default class WeatherDisplay implements m.Component<any, any> {
             return m(".weather-display.flex-column.flex-center", [
                 m(".flex-row.flex-center-cross", [
                     m(".weather-icon.margin-right", icon(this.weatherIconSvg || Icons.SimpleWeatherCloudy)),
-                    m(".weather-temp", `${this.weather.temp.toFixed(0)} ${unitText}`)
+                    m(".weather-temp", `${this.weather.temp.toFixed(0)}${unitText}`)
                 ]),
 
                 m(".flex-row.flex-center", [
