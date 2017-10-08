@@ -14,6 +14,14 @@ body { background-color: $mmt-bg-color; }
 .mmt-style-time { color: $mmt-text-color; }
 .mmt-style-date { color: $mmt-text-color; }
 .mmt-style-meta-text { color: $mmt-meta-color; }
+
+.mmt-accent-link { color: inherit; }
+.mmt-accent-link:visited { color: inherit; }
+.mmt-accent-link:visited:hover { color: $mmt-accent-color; }
+.mmt-accent-link:hover { color: $mmt-accent-color; }
+
+.mmt-accent-color { color: $mmt-accent-color; }
+.mmt-accent-color-hover:hover { color: $mmt-accent-color; }
 .mmt-dark-bg { background-color: $mmt-bg-dark-color; }
 // .mmt-style-options-pane { background-color: $mmt-bg-dark-color; }
 // .mmt-style-options-pane-section {  }

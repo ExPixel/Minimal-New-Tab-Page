@@ -14,3 +14,5 @@ body { transition: background-color $mmt-tdelay ease; }
 .mmt-style-icon-button:hover {
     transition: color $mmt-tdelay ease;
 }
+
+.mmt-accent-link { transition: color $mmt-tdelay ease; }

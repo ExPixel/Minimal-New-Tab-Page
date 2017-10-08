@@ -1,13 +1,21 @@
 import m = require("mithril");
+import Options from "../ts/options";
 import { icon, Icons } from "./icons/icons";
 
 function _link(url: string, text?: string) {
     let utext = text || url;
-    return m("a", { href: url, target:"_blank" }, [utext, m("sup", icon(Icons.ExternalLink))]);
+    return m("a.mmt-accent-link", { href: url, target:"_blank" }, [utext, m("sup", icon(Icons.ExternalLink))]);
 }
 
 function _code(code: string) {
     return m("span.code.mmt-dark-bg", code);
+}
+
+function closeHelp(event: Event): boolean {
+    Options.displayHelp = false;
+    Options.save();
+    event.preventDefault();
+    return false;
 }
 
 export default class Help implements m.Component<any, any> {
@@ -19,7 +27,7 @@ export default class Help implements m.Component<any, any> {
 
                 Thank your for installing <strong>Minimal New Tab Page</strong>.
                 Below you will find some documentation to help you get started.
-                You can get rid of this text and start using the new tag page
+                You can get rid of this text and start using the new tab page
                 by opening the options menu using the button (`),
                 icon(Icons.Settings),
                 m.trust(`) at the bottom left of the page. From there you can uncheck
@@ -66,6 +74,10 @@ export default class Help implements m.Component<any, any> {
                 ` probably won't work but `,
                 _code("https://www.google.com"),
                 ` will.`
+            ]),
+
+            m("p", [
+                m("a.mmt-accent-link", {href: "#", onclick: closeHelp}, "Hide Help Text")
             ])
         ]);
     }
