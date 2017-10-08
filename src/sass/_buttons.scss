@@ -24,11 +24,16 @@
     svg { pointer-events: none; }
     .icon { pointer-events: none; }
 
+    &.icon-rotate-selected {
+        transform-origin: 50% 50%;
+    }
+
     &.selected.icon-rotate-selected,
     &.icon-rotate-selected:hover,
     &.icon-rotate-selected:active {
         transform: rotate(45deg);
         transform-origin: 50% 50%;
+        transition: color .2s ease, transform .2s ease;
     }
 
     &.btn-large {
