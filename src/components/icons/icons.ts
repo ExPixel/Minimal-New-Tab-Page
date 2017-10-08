@@ -13,6 +13,7 @@ export const Icons  = {
     Edit3: fs.readFileSync(__dirname + "/img/edit-3.svg", "utf8") as string,
     AlertCircle: fs.readFileSync(__dirname + "/img/alert-circle.svg", "utf8") as string,
     SimpleWeatherCloudy: fs.readFileSync(__dirname + "/img/sw-cloudy.svg", "utf8") as string,
+    ExternalLink: fs.readFileSync(__dirname + "/img/external-link.svg", "utf8") as string,
 };
 
 export function icon(svg: string, attrs?: any) {

@@ -14,11 +14,13 @@
 html {
     font-size: $font-size-html;
     -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     font-size: $font-size-default;
     font-family: $font-family-default;
+    text-rendering: optimizeLegibility;
 }
 
 #app {

@@ -8,6 +8,7 @@ import { FONT_SIZE_MIN, FONT_SIZE_MAX } from "./constants";
 const OPTIONS_LS_KEY = "options";
 
 export class Options {
+    public displayHelp: boolean = true;
     public displayTime: boolean = true;
     public displayDate: boolean = true;
     public displayWeather: boolean = false;

@@ -89,6 +89,13 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
 
         const sections = [
             m("section.flex-column.margin-h", [
+                m("h4", "General"),
+                m(Switch, {
+                    checked: Options.displayHelp,
+                    onchange: Options.withAttr<boolean>("checked", (o, v) => o.displayHelp = v)
+                }, "Show Help Text"),
+            ]),
+            m("section.flex-column.margin-h", [
                 m("h4", "Clock"),
                 m(Switch, {
                     checked: Options.displayTime,

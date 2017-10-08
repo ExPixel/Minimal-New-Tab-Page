@@ -7,6 +7,7 @@ import SpeedDialList from "./speed-dial/SpeedDialList";
 import OptionsPane from "./options/OptionsPane";
 import Options from "../ts/options";
 import SpeedDial from "../ts/speed-dial";
+import Help from "./Help";
 import { icon, Icons } from "./icons/icons";
 import { clamp } from "../ts/util";
 import { SD_SECTION_WIDTH_MIN, SD_SECTION_WIDTH_MAX } from "../ts/constants";
@@ -74,16 +75,29 @@ export default class App implements m.Component<any, any> {
             optionsPage = m(OptionsPane, { class: "minimal-options-hide", isHidden: true });
         }
 
+        let displayedSections;
+        if (Options.displayHelp) {
+            displayedSections = [
+                m(".flex-row", [
+                    m(".flex-1"),
+                    m(".flex-8", m(Help)),
+                    m(".flex-1")
+                ])
+            ];
+        } else {
+            displayedSections = [
+                weatherSection,
+                clocksSection,
+                speedDialSection
+            ];
+        }
+
         return m("div.app-container.mmt-style-app.flex-row", [
              optionsPage,
 
             m("div.flex-1.flex-column", {id: "minimal-app-main"}, [
                 // Main Content In Center
-                m("div.flex-1.flex-column.flex-center.flex-center-cross.minimal-sections.scroll-y", [
-                    weatherSection,
-                    clocksSection,
-                    speedDialSection
-                ]),
+                m("div.flex-1.flex-column.flex-center.flex-center-cross.minimal-sections.scroll-y", displayedSections),
 
                 m("div.minimal-footer.flex-row", [
                     m("button.icon-button.icon-rotate-selected.btn-large.mmt-style-icon-button", {
