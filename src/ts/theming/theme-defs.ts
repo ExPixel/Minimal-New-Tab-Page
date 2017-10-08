@@ -123,7 +123,7 @@ export const themeMap = new Map([
     [machuPicchuTheme.shortname, machuPicchuTheme]
 ]);
 
-export const defaultThemeName = "dark-theme";
+export const defaultThemeName = "light-theme";
 export const defaultTheme: IMinimalTheme = themeMap.get(defaultThemeName) as IMinimalTheme;
 
 export function getThemeByName(name: string): IMinimalTheme | undefined {
