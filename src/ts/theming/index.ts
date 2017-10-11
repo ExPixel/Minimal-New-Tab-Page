@@ -4,6 +4,7 @@ declare interface FileSystem { readFileSync: (filename: string, encoding: string
 
 import MStorage from "../storage";
 import { defaultTheme, IMinimalTheme, getThemeByName, themeKeys } from "./theme-defs";
+import parseColor from "../color-parser";
 const fs: FileSystem = require("fs");
 
 /** Local Storage Key  */
@@ -51,20 +52,32 @@ const themeSource = (function() {
     return source.substring(begin, end);
 })();
 
+function colorFilter(input: string): string {
+    const parsed = parseColor(input);
+    if (parsed) {
+        const [r, g, b, a] = parsed;
+        if (a === 1.0) return `rgb(${r}, ${g}, ${b})`;
+        else return `rgb(${r}, ${g}, ${b}, ${a.toFixed(3)})`;
+    } else {
+        return "rgb(255, 255, 255, 0.0)";
+    }
+}
+
 const THEME_VAR_MAP = new Map([
-    ["$mmt-bg-color",       "backgroundColor"],
-    ["$mmt-bg-dark-color",  "backgroundColorDark"],
-    ["$mmt-text-color",     "textColor"],
-    ["$mmt-meta-color",     "metaColor"],
-    ["$mmt-accent-color",   "accentColor"],
-]);
+    ["$mmt-bg-color",       ["backgroundColor", colorFilter]],
+    ["$mmt-bg-dark-color",  ["backgroundColorDark", colorFilter]],
+    ["$mmt-text-color",     ["textColor", colorFilter]],
+    ["$mmt-meta-color",     ["metaColor", colorFilter]],
+    ["$mmt-accent-color",   ["accentColor", colorFilter]],
+]) as Map<string, [string, null | ((s: string) => string)]>;
 
 export function loadTheme(newTheme?: any) {
     const theme = newTheme ? Object.assign({}, defaultTheme, newTheme) : defaultTheme;
     const replacedSource = themeSource.replace(/(\$[\w-_]+)/g, (_: string, varname: string) => {
         if (THEME_VAR_MAP.has(varname)) {
-            const mapped = THEME_VAR_MAP.get(varname)!;
-            return (theme as any)[mapped];
+            const [mapped, filter] = THEME_VAR_MAP.get(varname)!;
+            if (filter) { return filter((theme as any)[mapped]); }
+            else { return (theme as any)[mapped]; }
         } else {
             console.error("Variable %s not found in theme variable map.", varname);
             return "";
