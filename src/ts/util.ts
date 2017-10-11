@@ -1,3 +1,5 @@
+import parseColor from "./color-parser";
+
 export function getUserLocale(): string {
     let language: string | undefined = undefined;
     if (window.navigator.languages && window.navigator.languages.length > 0) {
@@ -63,4 +65,15 @@ export function getDurationString(from: Date | number, to: Date | number) {
 
     if (value === 1) { return `1 ${unitText.singular} ago`; }
     else { return `${value} ${unitText.plural} ago`; }
+}
+
+export function colorToRGBString(colorString: string | number): string {
+    const parsed = parseColor(colorString);
+    if (parsed) {
+        const [r, g, b, a] = parsed;
+        if (a === 1.0) return `rgb(${r}, ${g}, ${b})`;
+        else return `rgb(${r}, ${g}, ${b}, ${a.toFixed(3)})`;
+    } else {
+        return "rgb(255, 255, 255, 0.0)";
+    }
 }

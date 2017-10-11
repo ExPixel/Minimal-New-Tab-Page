@@ -1,6 +1,6 @@
 import m = require("mithril");
 import MStorage from "./storage";
-import { defaultThemeName } from "./theming/theme-defs";
+import { defaultThemeName, IMinimalTheme, defaultTheme, themeMap } from "./theming/theme-defs";
 import { checkThemeMatch, loadMinimalThemeStylesheet } from "./theming/index";
 import { clamp } from "./util";
 import { FONT_SIZE_MIN, FONT_SIZE_MAX } from "./constants";
@@ -38,6 +38,11 @@ export class Options {
         fontSize: 13,
         fontFamily: ""
     };
+
+    public customTheme: IMinimalTheme = Object.assign({}, defaultTheme, {
+        name: "Custom Theme",
+        shortname: "custom-theme",
+    });
 
     public loadAppearanceStylesheet() {
         const remBase = 10;
@@ -79,7 +84,7 @@ export class Options {
                 }
             });
         }
-
+        themeMap.set(this.customTheme.shortname, this.customTheme);
         checkThemeMatch(this.selectedThemeName);
     }
 

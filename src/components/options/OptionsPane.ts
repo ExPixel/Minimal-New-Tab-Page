@@ -3,8 +3,9 @@ import Options from "../../ts/options";
 import Switch from "../misc/Switch";
 import { icon, Icons } from "../icons/icons";
 import SpeedDialEditor from "./SpeedDialEditor";
+import ThemeEditor from "./ThemeEditor";
 import { themeChangedByName } from "../../ts/theming/index";
-import { themeMap } from "../../ts/theming/theme-defs";
+import { themeMap, IMinimalTheme } from "../../ts/theming/theme-defs";
 import { weatherControl } from "../weather/WeatherDisplay";
 import { clamp } from "../../ts/util";
 import { FONT_SIZE_MIN, FONT_SIZE_MAX, SD_SECTION_WIDTH_MIN, SD_SECTION_WIDTH_MAX, SD_ITEM_WIDTH_MAX, SD_ITEM_WIDTH_MIN } from "../../ts/constants";
@@ -229,9 +230,10 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                 m(SpeedDialEditor, {isHidden: vnode.attrs.isHidden})
             ]),
 
-            m("section.flex-column.margin-h", [
-                m("h4", "Appearance"),
-                m(".form-group", [
+            m("section.flex-column", [
+                m("h4.margin-h", "Appearance"),
+
+                m(".form-group.margin-h", [
                     m("label.form-label", "Theme"),
                     m("select", {
                         value: Options.selectedThemeName,
@@ -239,7 +241,21 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                     }, themeOptions)
                 ]),
 
-                m(".form-group", [
+                Options.selectedThemeName === "custom-theme" ? m(".minimal-options-section.margin-bottom", [
+                    m(ThemeEditor, {
+                        theme: Options.customTheme,
+                        onchange: (theme: IMinimalTheme) => {
+                            Options.customTheme = theme;
+                            // This is a different object so I have to fix the mapping.
+                            themeMap.set(Options.customTheme.shortname, Options.customTheme);
+                            themeChangedByName(Options.customTheme.shortname);
+                            Options.save();
+                        },
+                        _class: "margin-h margin-v"
+                    })
+                ]) : null,
+
+                m(".form-group.margin-h", [
                     m("label.form-label", "Font Family"),
                     m("input.form-input.style-options-input", {
                         value: Options.appearance.fontFamily,
@@ -250,7 +266,7 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                     })
                 ]),
 
-                m(".form-group", [
+                m(".form-group.margin-h", [
                     m("label.form-label", "Font Size (px)"),
                     m("input.form-input.style-options-input", {
                         value: Options.appearance.fontSize,

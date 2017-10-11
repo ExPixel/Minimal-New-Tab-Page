@@ -102,16 +102,6 @@ const machuPicchuTheme: IMinimalTheme = {
     accentColor: "#F0F0D8"
 };
 
-export const customTheme: IMinimalTheme = {
-    name: "Custom Theme",
-    shortname: "custom-theme",
-    backgroundColor: "#f8f9fa",
-    backgroundColorDark: "#e9ecef",
-    textColor: "#f8f9fa",
-    metaColor: "rgba(255, 255, 255, 0.6)",
-    accentColor: "#228ae6"
-};
-
 export const themeMap = new Map([
     [darkTheme.shortname, darkTheme],
     [lightTheme.shortname, lightTheme],

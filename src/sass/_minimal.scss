@@ -97,7 +97,7 @@ ul.speed-dial-list {
 //         Might make it difficult to edit a theme if the colors on the options
 //         menu are constantly changing.
 $options-bg-color: #212529;
-$options-section-bg-color: darken($options-bg-color, 5%);
+$options-section-bg-color: #2E4761;
 $options-text-color: #f8f9fa;
 
 .minimal-options {
@@ -258,4 +258,19 @@ $options-text-color: #f8f9fa;
     .aside {
         font-style: italic;
     }
+}
+
+// #THEME EDITOR:
+
+.theme-editor {
+}
+
+.theme-editor-color-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: black;
+    border: 2px solid white;
+    transition: background-color .2s ease;
+    box-shadow: 0px 0px 4px 0px #000;
 }

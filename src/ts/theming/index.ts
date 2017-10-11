@@ -4,7 +4,7 @@ declare interface FileSystem { readFileSync: (filename: string, encoding: string
 
 import MStorage from "../storage";
 import { defaultTheme, IMinimalTheme, getThemeByName, themeKeys } from "./theme-defs";
-import parseColor from "../color-parser";
+import { colorToRGBString } from "../util";
 const fs: FileSystem = require("fs");
 
 /** Local Storage Key  */
@@ -52,23 +52,12 @@ const themeSource = (function() {
     return source.substring(begin, end);
 })();
 
-function colorFilter(input: string): string {
-    const parsed = parseColor(input);
-    if (parsed) {
-        const [r, g, b, a] = parsed;
-        if (a === 1.0) return `rgb(${r}, ${g}, ${b})`;
-        else return `rgb(${r}, ${g}, ${b}, ${a.toFixed(3)})`;
-    } else {
-        return "rgb(255, 255, 255, 0.0)";
-    }
-}
-
 const THEME_VAR_MAP = new Map([
-    ["$mmt-bg-color",       ["backgroundColor", colorFilter]],
-    ["$mmt-bg-dark-color",  ["backgroundColorDark", colorFilter]],
-    ["$mmt-text-color",     ["textColor", colorFilter]],
-    ["$mmt-meta-color",     ["metaColor", colorFilter]],
-    ["$mmt-accent-color",   ["accentColor", colorFilter]],
+    ["$mmt-bg-color",       ["backgroundColor", colorToRGBString]],
+    ["$mmt-bg-dark-color",  ["backgroundColorDark", colorToRGBString]],
+    ["$mmt-text-color",     ["textColor", colorToRGBString]],
+    ["$mmt-meta-color",     ["metaColor", colorToRGBString]],
+    ["$mmt-accent-color",   ["accentColor", colorToRGBString]],
 ]) as Map<string, [string, null | ((s: string) => string)]>;
 
 export function loadTheme(newTheme?: any) {
