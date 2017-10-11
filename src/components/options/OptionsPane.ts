@@ -5,7 +5,7 @@ import { icon, Icons } from "../icons/icons";
 import SpeedDialEditor from "./SpeedDialEditor";
 import ThemeEditor from "./ThemeEditor";
 import { themeChangedByName } from "../../ts/theming/index";
-import { themeMap, IMinimalTheme } from "../../ts/theming/theme-defs";
+import { themeMap, IMinimalTheme, defaultTheme } from "../../ts/theming/theme-defs";
 import { weatherControl } from "../weather/WeatherDisplay";
 import { clamp } from "../../ts/util";
 import { FONT_SIZE_MIN, FONT_SIZE_MAX, SD_SECTION_WIDTH_MIN, SD_SECTION_WIDTH_MAX, SD_ITEM_WIDTH_MAX, SD_ITEM_WIDTH_MIN } from "../../ts/constants";
@@ -62,6 +62,14 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
         Options.save();
 
         // #FIXME: See FIXME of setDarkSkyAPIKey
+    }
+
+    private setCustomTheme(theme: IMinimalTheme) {
+        Options.customTheme = theme;
+        // This is a different object so I have to fix the mapping.
+        themeMap.set(Options.customTheme.shortname, Options.customTheme);
+        themeChangedByName(Options.customTheme.shortname);
+        Options.save();
     }
 
     private setWeatherLongitude(lon: string) {
@@ -242,17 +250,27 @@ export default class OptionsPane implements m.Component<OptionsPaneAttrs, any> {
                 ]),
 
                 Options.selectedThemeName === "custom-theme" ? m(".minimal-options-section.margin-bottom", [
+                    m("h5.margin-h.margin-top", "Theme Editor"),
+
                     m(ThemeEditor, {
                         theme: Options.customTheme,
                         onchange: (theme: IMinimalTheme) => {
-                            Options.customTheme = theme;
-                            // This is a different object so I have to fix the mapping.
-                            themeMap.set(Options.customTheme.shortname, Options.customTheme);
-                            themeChangedByName(Options.customTheme.shortname);
-                            Options.save();
+                            this.setCustomTheme(theme);
                         },
                         _class: "margin-h margin-v"
-                    })
+                    }),
+
+                    m(".flex-row.margin-bottom.margin-h", [
+                        m.trust('<div class="flex-1">&nbsp;</div>'),
+                        m("button", {
+                            onclick: () => {
+                                this.setCustomTheme(Object.assign({}, defaultTheme, {
+                                    name: "Custom Theme",
+                                    shortname: "custom-theme",
+                                }));
+                            }
+                        }, "Reset")
+                    ])
                 ]) : null,
 
                 m(".form-group.margin-h", [
