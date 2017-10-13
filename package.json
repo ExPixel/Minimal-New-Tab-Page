@@ -1,6 +1,6 @@
 {
   "name": "minimalnewtab",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Minimal new tab page for Chrome.",
   "main": "index.js",
   "repository": "https://github.com/expixel/minimalnewtab",
