@@ -1,4 +1,4 @@
-import parseColor from "./color-parser";
+import parseColor = require("colorparser");
 
 export function getUserLocale(): string {
     let language: string | undefined = undefined;
